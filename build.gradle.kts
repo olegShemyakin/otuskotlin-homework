@@ -1,21 +1,18 @@
 plugins {
-    kotlin("jvm") version "2.0.20"
+    kotlin("jvm") apply false
 }
 
-group = "org.akira"
-version = "1.0-SNAPSHOT"
+group = "org.akira.otuskotlin.marketplace"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-kotlin {
-    jvmToolchain(21)
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    group = rootProject.group
+    version = rootProject.version
 }
