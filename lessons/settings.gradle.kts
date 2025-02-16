@@ -8,7 +8,11 @@ pluginManagement {
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
-rootProject.name = "otuskotlin-homework"
+rootProject.name = "otuskotlin-homework-lessons"
 
-includeBuild("lessons")
-includeBuild("ads-second-hand-books-be")
+include("m1l1-first")
+include("m1l3-func")
+include("m1l4-oop")
+include("m2l1-dsl")
+include("m2l2-coroutines")
+include("m2l3-flows")
