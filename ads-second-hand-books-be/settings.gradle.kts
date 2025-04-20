@@ -26,4 +26,4 @@ plugins {
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":ads-second-hand-books-tmp")
+include(":ads-second-hand-books-api-jackson")
