@@ -20,10 +20,11 @@ pluginManagement {
     }
 }
 
-plugins {
+/*plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
-}
+}*/
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":ads-second-hand-books-api-jackson")
+include(":ads-second-hand-books-common")
