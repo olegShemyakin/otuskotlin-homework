@@ -198,8 +198,7 @@ components:
         typeAd:
           $ref: '#/components/schemas/TypeAd'
         price:
-          type: number
-          format: double
+          type: string
 
     TypeAd:
       type: string

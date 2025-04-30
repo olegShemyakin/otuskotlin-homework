@@ -28,3 +28,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":ads-second-hand-books-api-jackson")
 include(":ads-second-hand-books-common")
+include(":ads-second-hand-books-api-mappers")

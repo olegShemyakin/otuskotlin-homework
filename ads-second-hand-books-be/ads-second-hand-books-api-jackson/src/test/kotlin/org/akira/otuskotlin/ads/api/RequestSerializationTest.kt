@@ -6,7 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class RequestSerializationTest {
-    private val expectedSerReq = "{\"requestType\":\"create\",\"requestType\":\"create\",\"debug\":{\"mode\":\"stub\",\"stub\":\"badId\"},\"ad\":{\"title\":\"Book\",\"authors\":\"John Doe\",\"publishing\":\"Azbooka\",\"year\":2025,\"typeAd\":\"proposal\",\"price\":10}}"
+    private val expectedSerReq = "{\"requestType\":\"create\",\"requestType\":\"create\",\"debug\":{\"mode\":\"stub\",\"stub\":\"badId\"},\"ad\":{\"title\":\"Book\",\"authors\":\"John Doe\",\"publishing\":\"Azbooka\",\"year\":2025,\"typeAd\":\"proposal\",\"price\":\"10.0\"}}"
     private val request = AdCreateRequest(
         requestType = "create",
         debug = AdDebug(
@@ -19,7 +19,7 @@ class RequestSerializationTest {
             publishing = "Azbooka",
             year = 2025,
             typeAd = TypeAd.PROPOSAL,
-            price = BigDecimal.TEN
+            price = "10.0"
         )
     )
 

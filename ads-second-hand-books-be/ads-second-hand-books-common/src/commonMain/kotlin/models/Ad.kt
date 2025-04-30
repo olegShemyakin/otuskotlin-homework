@@ -1,5 +1,7 @@
 package org.akira.otuskotlin.ads.common.models
 
+import com.ionspin.kotlin.bignum.decimal.BigDecimal
+
 data class Ad(
     var id: AdId = AdId.NONE,
     var title: String = "",
@@ -7,7 +9,7 @@ data class Ad(
     var publishing: String = "",
     var year: Int = 0,
     var adType: AdType = AdType.NONE,
-    var price: Double = 0.0,
+    var price: BigDecimal = BigDecimal.ZERO,
     var ownerId: AdUserId = AdUserId.NONE,
     var lock: AdLock = AdLock.NONE,
     val permissionClient: MutableSet<AdPermissionClient> = mutableSetOf()
@@ -16,5 +18,7 @@ data class Ad(
 
     companion object {
         private val NONE = Ad()
+
+        fun toBigDecimal(price: String): BigDecimal = BigDecimal.parseString(price)
     }
 }
