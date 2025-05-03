@@ -1,0 +1,108 @@
+openapi: 3.0.4
+info:
+  version: 1.0.0
+  title: Log models
+  description: Log models for logging services
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+paths: {}
+
+components:
+  schemas:
+    CommonLogModel:
+      title: Общая модель лога
+      description: Общая модель лога для всез микросервисов системы
+      type: object
+      properties:
+        messageTime:
+          type: string
+        logId:
+          type: string
+        source:
+          type: string
+        ad:
+          $ref: '#/components/schemas/AdLogModel'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorLogModel'
+
+    AdLogModel:
+      title: Модель лога для микросервиса Marketplace
+      type: object
+      properties:
+        requestId:
+          type: string
+        operation:
+          $ref: '#/components/schemas/AdLogOperation'
+        requestAd:
+          $ref: '#/components/schemas/AdLog'
+        requestFilter:
+          $ref: '#/components/schemas/AdFilterLog'
+        responseAd:
+          $ref: '#/components/schemas/AdLog'
+        responseAds:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdLog'
+
+    AdLogOperation:
+      type: string
+      enum:
+        - create
+        - read
+        - update
+        - delete
+        - search
+        - init
+        - finish
+
+    ErrorLogModel:
+      title: Модель лога для ошибки
+      type: object
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        code:
+          type: string
+        level:
+          type: string
+
+    AdLog:
+      title: Модель лога для объявления
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        authors:
+          type: string
+        publishing:
+          type: string
+        year:
+          type: integer
+        typeAd:
+          type: string
+        price:
+          type: string
+        ownerId:
+          type: string
+        permissions:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+    AdFilterLog:
+      title: Модель лога фильтра
+      properties:
+        searchString:
+          type: string
+        ownerId:
+          type: string
+        typeAd:
+          type: string
