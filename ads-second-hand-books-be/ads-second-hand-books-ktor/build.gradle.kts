@@ -143,7 +143,7 @@ tasks {
     val registryPref: String? = System.getenv("CONTAINER_REGISTRY_PREF")
     val imageName = registryPref?.let { "$it/${project.name}" } ?: project.name
 
-    val dockerBuildX64Image by creating(DockerBuildImage::class) {
+    /*val dockerBuildX64Image by creating(DockerBuildImage::class) {
         group = "docker"
         dependsOn(dockerDockerfileX64)
         images.add("$imageName-x64:${rootProject.version}")
@@ -159,5 +159,5 @@ tasks {
             password.set(registryPass)
             url.set("https://$registryHost/v1/")
         }
-    }
+    }*/
 }

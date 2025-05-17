@@ -7,5 +7,5 @@ ktor:
     - resources
   application:
     modules:
-      - "org.akira.otuskotlin.ads.app.ktor.ApplicationJvmKt.module"
+      - "org.akira.otuskotlin.ads.app.ktor.ApplicationJvmKt.moduleJvm"
   logger: logback

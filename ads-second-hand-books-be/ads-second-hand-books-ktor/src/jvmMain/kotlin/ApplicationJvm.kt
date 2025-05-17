@@ -1,3 +1,6 @@
+package org.akira.otuskotlin.ads.app.ktor
+
+import AdAppSettings
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.autohead.*
@@ -12,7 +15,8 @@ import org.akira.otuskotlin.ads.app.ktor.plugins.initAppSettings
 import org.slf4j.event.Level
 import v1.v1Ad
 
-fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)
+//необходим файл конфигурации application.conf
+//fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)
 
 fun Application.moduleJvm(
     appSettings: AdAppSettings = initAppSettings()

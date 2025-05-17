@@ -36,3 +36,4 @@ include(":ads-second-hand-books-biz")
 include(":ads-second-hand-books-app-common")
 
 include(":ads-second-hand-books-ktor")
+include(":ads-second-hand-books-kafka")
