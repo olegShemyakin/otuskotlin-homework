@@ -13,6 +13,7 @@ kotlin {
                 implementation(libs.kotlinx.serialization.core)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlin.bignum)
+                api("org.akira.otuskotlin.ads.libs:ads-second-hand-books-lib-logging-common")
             }
         }
         commonTest {

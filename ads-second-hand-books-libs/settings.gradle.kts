@@ -1,4 +1,4 @@
-rootProject.name = "ads-second-hand-books-be"
+rootProject.name = "ads-second-hand-books-libs"
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -20,13 +20,9 @@ pluginManagement {
     }
 }
 
-/*plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
-}*/
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+}
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-include(":ads-second-hand-books-api-jackson")
-include(":ads-second-hand-books-common")
-include(":ads-second-hand-books-api-mappers")
-include(":ads-second-hand-books-api-log")
+include(":ads-second-hand-books-lib-logging-common")
+include(":ads-second-hand-books-lib-logging-logback")
