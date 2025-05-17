@@ -30,3 +30,10 @@ include(":ads-second-hand-books-api-jackson")
 include(":ads-second-hand-books-common")
 include(":ads-second-hand-books-api-mappers")
 include(":ads-second-hand-books-api-log")
+
+include(":ads-second-hand-books-stubs")
+include(":ads-second-hand-books-biz")
+include(":ads-second-hand-books-app-common")
+
+include(":ads-second-hand-books-ktor")
+include(":ads-second-hand-books-kafka")
