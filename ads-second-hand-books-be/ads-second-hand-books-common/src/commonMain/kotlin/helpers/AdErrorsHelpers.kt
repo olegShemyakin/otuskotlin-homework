@@ -1,6 +1,8 @@
 package org.akira.otuskotlin.ads.common.helpers
 
+import org.akira.otuskotlin.ads.common.AdContext
 import org.akira.otuskotlin.ads.common.models.AdError
+import org.akira.otuskotlin.ads.common.models.AdState
 
 fun Throwable.asAdError(
     code: String = "unknown",
@@ -13,3 +15,10 @@ fun Throwable.asAdError(
     message = message,
     exception = this
 )
+
+inline fun AdContext.addError(vararg error: AdError) = errors.addAll(error)
+
+inline fun AdContext.fail(error: AdError) {
+    addError(error)
+    state = AdState.FAILING
+}

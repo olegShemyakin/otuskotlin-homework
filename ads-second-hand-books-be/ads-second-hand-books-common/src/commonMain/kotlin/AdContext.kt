@@ -9,6 +9,7 @@ data class AdContext(
     var state: AdState = AdState.NONE,
     val errors: MutableList<AdError> = mutableListOf(),
 
+    var corSettings: AdCorSettings = AdCorSettings(),
     var workMode: AdWorkMode = AdWorkMode.PROD,
     var stubCase: AdsStubs = AdsStubs.NONE,
 
