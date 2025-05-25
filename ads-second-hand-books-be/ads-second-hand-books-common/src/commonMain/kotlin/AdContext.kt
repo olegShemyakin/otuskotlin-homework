@@ -18,6 +18,12 @@ data class AdContext(
     var adRequest: Ad = Ad(),
     var adFilterRequest: AdFilter = AdFilter(),
 
+    var adValidating: Ad = Ad(),
+    var adFilterValidating: AdFilter = AdFilter(),
+
+    var adValidated: Ad = Ad(),
+    var adFilterValidated: AdFilter = AdFilter(),
+
     var adResponse: Ad = Ad(),
     val adsResponse: MutableList<Ad> = mutableListOf()
 
