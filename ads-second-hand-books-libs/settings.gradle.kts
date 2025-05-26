@@ -26,3 +26,4 @@ plugins {
 
 include(":ads-second-hand-books-lib-logging-common")
 include(":ads-second-hand-books-lib-logging-logback")
+include(":ads-second-hand-books-lib-cor")
