@@ -14,6 +14,7 @@ object AdStubBook {
             price = BigDecimal.parseString("700.00"),
             adType = AdType.PROPOSAL,
             ownerId = AdUserId("user-1"),
+            lock = AdLock("123"),
             permissionClient = mutableSetOf(
                 AdPermissionClient.READ,
                 AdPermissionClient.UPDATE,

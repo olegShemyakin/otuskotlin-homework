@@ -73,25 +73,25 @@ private fun AdPermissionClient.toTransport(): AdPermissions = when (this) {
     AdPermissionClient.DELETE -> AdPermissions.DELETE
 }
 
-private fun AdType.toTransport(): TypeAd? = when (this) {
+internal fun AdType.toTransport(): TypeAd? = when (this) {
     AdType.DEMAND -> TypeAd.DEMAND
     AdType.PROPOSAL -> TypeAd.PROPOSAL
     AdType.NONE -> null
 }
 
-private fun List<AdError>.toTransportErrors(): List<Error>? = this
+internal fun List<AdError>.toTransportErrors(): List<Error>? = this
     .map { it.toTransport() }
     .toList()
     .takeIf { it.isNotEmpty() }
 
-private fun AdError.toTransport() = Error(
+internal fun AdError.toTransport() = Error(
     code = code.takeIf { it.isNotBlank() },
     group = group.takeIf { it.isNotBlank() },
     field = field.takeIf { it.isNotBlank() },
     message = message.takeIf { it.isNotBlank() }
 )
 
-private fun AdState.toResult(): ResponseResult? = when (this) {
+internal fun AdState.toResult(): ResponseResult? = when (this) {
     AdState.RUNNING -> ResponseResult.SUCCESS
     AdState.FAILING -> ResponseResult.ERROR
     AdState.FINISHING -> ResponseResult.SUCCESS

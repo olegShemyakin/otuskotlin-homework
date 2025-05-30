@@ -37,3 +37,9 @@ include(":ads-second-hand-books-app-common")
 
 include(":ads-second-hand-books-ktor")
 include(":ads-second-hand-books-kafka")
+
+//DB
+include(":ads-second-hand-books-repo-common")
+include(":ads-second-hand-books-repo-inmemory")
+include(":ads-second-hand-books-repo-test")
+include(":ads-second-hand-books-repo-stubs")

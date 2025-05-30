@@ -43,6 +43,7 @@ coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reacto
 coroutines-reactive = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactive", version.ref = "coroutines" }
 kotlin-bignum = { module = "com.ionspin.kotlin:bignum", version.ref = "kotlin-bignum" }
 cor = { module = "org.akira.otuskotlin.ads.libs:ads-second-hand-books-lib-cor" }
+uuid = "com.benasher44:uuid:0.8.4"
 
 jackson-kotlin = {module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson"}
 jackson-datatype = {module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson"}
@@ -73,6 +74,9 @@ ktor-server-test = { module = "io.ktor:ktor-server-test-host", version.ref = "kt
 
 #Message Queues
 kafka-client = { module = "org.apache.kafka:kafka-clients", version.ref = "kafka" }
+
+#Databases
+db-cache4k = "io.github.reactivecircus.cache4k:cache4k:0.13.0"
 
 # Testing
 kotest-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }

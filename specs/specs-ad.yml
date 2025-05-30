@@ -284,6 +284,10 @@ components:
         searchString:
           type: string
           description: Поисковая строка
+        ownerId:
+          $ref: '#/components/schemas/UserId'
+        typeAd:
+          $ref: '#/components/schemas/TypeAd'
 
     AdSearchRequest:
       allOf:

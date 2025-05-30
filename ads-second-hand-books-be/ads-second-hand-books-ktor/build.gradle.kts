@@ -62,6 +62,10 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.serialization.json)
 
+                //DB
+                implementation(projects.adsSecondHandBooksRepoStubs)
+                implementation(projects.adsSecondHandBooksRepoInmemory)
+
                 //logging
                 implementation(project(":ads-second-hand-books-api-log"))
                 implementation("org.akira.otuskotlin.ads.libs:ads-second-hand-books-lib-logging-common")
@@ -73,6 +77,9 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+
+                //DB
+                implementation(projects.adsSecondHandBooksRepoCommon)
 
                 implementation(libs.ktor.server.test)
                 implementation(libs.ktor.client.negotiation)

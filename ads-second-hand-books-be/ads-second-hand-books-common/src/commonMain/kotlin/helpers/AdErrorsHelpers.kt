@@ -18,9 +18,15 @@ fun Throwable.asAdError(
 )
 
 inline fun AdContext.addError(vararg error: AdError) = errors.addAll(error)
+inline fun AdContext.addErrors(error: Collection<AdError>) = errors.addAll(error)
 
 inline fun AdContext.fail(error: AdError) {
     addError(error)
+    state = AdState.FAILING
+}
+
+inline fun AdContext.fail(errors: Collection<AdError>) {
+    addErrors(errors)
     state = AdState.FAILING
 }
 
@@ -39,4 +45,16 @@ inline fun errorValidation(
     group = "validation",
     message = "Validation error for field $field: $description",
     level = level
+)
+
+inline fun errorSystem(
+    violationCode: String,
+    level: LogLevel = LogLevel.ERROR,
+    e: Throwable
+) = AdError(
+    code = "system-$violationCode",
+    group = "system",
+    message = "System error occurred. Our stuff has been informed, please retry later",
+    level = level,
+    exception = e
 )

@@ -23,6 +23,8 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
 
                 api(libs.coroutines.test)
+                implementation(projects.adsSecondHandBooksRepoTest)
+                implementation(projects.adsSecondHandBooksRepoInmemory)
             }
         }
         jvmMain {
