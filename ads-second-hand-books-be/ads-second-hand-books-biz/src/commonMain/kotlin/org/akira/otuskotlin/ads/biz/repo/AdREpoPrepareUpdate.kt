@@ -17,6 +17,7 @@ fun ICorChainDsl<AdContext>.repoPrepareUpdate(title: String) = worker {
             year = adValidated.year
             adType = adValidated.adType
             price = adValidated.price
+            lock = adValidated.lock
         }
     }
 }

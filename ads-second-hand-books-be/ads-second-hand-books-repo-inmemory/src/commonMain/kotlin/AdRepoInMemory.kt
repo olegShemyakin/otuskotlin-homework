@@ -4,11 +4,9 @@ import com.benasher44.uuid.uuid4
 import io.github.reactivecircus.cache4k.Cache
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import org.akira.otuskotlin.ads.common.models.Ad
-import org.akira.otuskotlin.ads.common.models.AdId
-import org.akira.otuskotlin.ads.common.models.AdType
-import org.akira.otuskotlin.ads.common.models.AdUserId
+import org.akira.otuskotlin.ads.common.models.*
 import org.akira.otuskotlin.ads.common.repo.*
+import org.akira.otuskotlin.ads.common.repo.exceptions.RepoEmptyLockException
 import org.akira.otuskotlin.ads.repo.common.IRepoAdInitializable
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
@@ -32,7 +30,7 @@ class AdRepoInMemory(
 
     override suspend fun createAd(rq: DbAdRequest): IDbAdResponse = tryAdMethod {
         val id = randomUuid()
-        val ad = rq.ad.copy(id = AdId(id))
+        val ad = rq.ad.copy(id = AdId(id), lock = AdLock(randomUuid()))
         val entity = AdEntity(ad)
         mutex.withLock {
             cache.put(id, entity)
@@ -54,13 +52,16 @@ class AdRepoInMemory(
         val rqAd = rq.ad
         val id = rqAd.id.takeIf { it != AdId.NONE } ?: return@tryAdMethod errorEmptyId
         val idKey = id.asString()
+        val oldLock = rqAd.lock.takeIf { it != AdLock.NONE } ?: return@tryAdMethod errorEmptyLock(id)
 
         mutex.withLock {
             val oldAd = cache.get(idKey)?.toInternal()
             when {
                 oldAd == null -> errorNotFound(id)
+                oldAd.lock == AdLock.NONE -> errorDb(RepoEmptyLockException(id))
+                oldAd.lock != oldLock -> errorRepoConcurrency(oldAd, oldLock)
                 else -> {
-                    val newAd = rqAd.copy()
+                    val newAd = rqAd.copy(lock = AdLock(randomUuid()))
                     val entity = AdEntity(newAd)
                     cache.put(idKey, entity)
                     DbAdResponseOk(newAd)
@@ -72,11 +73,14 @@ class AdRepoInMemory(
     override suspend fun deleteAd(rq: DbAdIdRequest): IDbAdResponse = tryAdMethod {
         val id = rq.id.takeIf { it != AdId.NONE } ?: return@tryAdMethod errorEmptyId
         val idKey = id.asString()
+        val oldLock = rq.lock.takeIf { it != AdLock.NONE } ?: return@tryAdMethod errorEmptyLock(id)
 
         mutex.withLock {
             val oldAd = cache.get(idKey)?.toInternal()
             when {
                 oldAd == null -> errorNotFound(id)
+                oldAd.lock == AdLock.NONE -> errorDb(RepoEmptyLockException(id))
+                oldAd.lock != oldLock -> errorRepoConcurrency(oldAd, oldLock)
                 else -> {
                     cache.invalidate(idKey)
                     DbAdResponseOk(oldAd)

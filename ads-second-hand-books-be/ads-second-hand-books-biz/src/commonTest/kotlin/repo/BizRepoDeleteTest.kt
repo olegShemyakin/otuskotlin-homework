@@ -22,9 +22,10 @@ class BizRepoDeleteTest {
         authors = "abc",
         publishing = "abc",
         year = 2025,
-         adType = AdType.DEMAND,
+        adType = AdType.DEMAND,
         price = BigDecimal.parseString("700"),
-        ownerId = userId
+        ownerId = userId,
+        lock = AdLock("123-234-abc-ABC")
     )
     private val repo = AdRepositoryMock(
         invokeReadAd = {
@@ -46,7 +47,7 @@ class BizRepoDeleteTest {
     fun repoDeleteSuccessTest() = runTest {
         val adToDelete = Ad(
             id = AdId("123"),
-            lock = AdLock("123")
+            lock = AdLock("123-234-abc-ABC")
         )
         val ctx = AdContext(
             command = command,

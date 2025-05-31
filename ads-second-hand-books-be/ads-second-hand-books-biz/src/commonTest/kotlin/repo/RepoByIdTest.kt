@@ -48,7 +48,7 @@ fun repoNotFoundTest(command: AdCommand) = runTest {
             year = 2025,
             adType = AdType.DEMAND,
             price = BigDecimal.parseString("700.00"),
-            lock = AdLock("123")
+            lock = AdLock("123-234-abc-ABC")
         )
     )
     processor.exec(ctx)

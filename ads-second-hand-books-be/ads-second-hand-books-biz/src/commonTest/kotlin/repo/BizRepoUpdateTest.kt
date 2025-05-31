@@ -22,7 +22,8 @@ class BizRepoUpdateTest {
         year = 2025,
         adType = AdType.DEMAND,
         price = BigDecimal.parseString("700"),
-        ownerId = userId
+        ownerId = userId,
+        lock = AdLock("123-234-abc-ABC")
     )
     private val repo = AdRepositoryMock(
         invokeReadAd = {
@@ -55,7 +56,7 @@ class BizRepoUpdateTest {
             year = 2025,
             adType = AdType.DEMAND,
             price = BigDecimal.parseString("700"),
-            lock = AdLock("123"),
+            lock = AdLock("123-234-abc-ABC"),
         )
         val ctx = AdContext(
             command = command,
