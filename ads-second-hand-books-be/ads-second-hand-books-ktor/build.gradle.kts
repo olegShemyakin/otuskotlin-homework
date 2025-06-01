@@ -63,6 +63,8 @@ kotlin {
                 implementation(libs.ktor.serialization.json)
 
                 //DB
+                implementation(libs.uuid)
+                implementation(projects.adsSecondHandBooksRepoCommon)
                 implementation(projects.adsSecondHandBooksRepoStubs)
                 implementation(projects.adsSecondHandBooksRepoInmemory)
 
@@ -102,6 +104,8 @@ kotlin {
                 implementation(project(":ads-second-hand-books-api-mappers"))
 
                 implementation("org.akira.otuskotlin.ads.libs:ads-second-hand-books-lib-logging-logback")
+                implementation(projects.adsSecondHandBooksRepoPgjvm)
+                implementation(libs.testcontainers.postgres)
             }
         }
 

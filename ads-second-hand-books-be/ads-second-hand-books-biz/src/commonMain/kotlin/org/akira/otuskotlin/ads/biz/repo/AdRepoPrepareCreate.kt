@@ -2,9 +2,9 @@ package org.akira.otuskotlin.ads.biz.repo
 
 import org.akira.otuskotlin.ads.common.AdContext
 import org.akira.otuskotlin.ads.common.models.AdState
-import org.akira.otuskotlin.ads.common.models.AdUserId
 import org.akira.otuskotlin.ads.cor.ICorChainDsl
 import org.akira.otuskotlin.ads.cor.worker
+import org.akira.otuskotlin.ads.stubs.AdStub
 
 fun ICorChainDsl<AdContext>.repoPrepareCreate(title: String) = worker {
     this.title = title
@@ -13,6 +13,6 @@ fun ICorChainDsl<AdContext>.repoPrepareCreate(title: String) = worker {
     handle {
         adRepoPrepare = adValidated.deepCopy()
         //Todo реазировать позднее
-        adRepoPrepare.ownerId = AdUserId.NONE
+        adRepoPrepare.ownerId = AdStub.get().ownerId
     }
 }

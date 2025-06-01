@@ -10,8 +10,8 @@ import org.akira.otuskotlin.ads.repo.inmemory.AdRepoInMemory
 fun Application.initAppSettings() : AdAppSettings {
     val corSettings = AdCorSettings(
         loggerProvider = getLoggerProviderConf(),
-        repoTest = AdRepoInMemory(),
-        repoProd = AdRepoInMemory(),
+        repoTest = getDatabaseConf(AdDbType.TEST),
+        repoProd = getDatabaseConf(AdDbType.PROD),
         repoStub = AdRepoStub()
     )
     return AdAppSettings(

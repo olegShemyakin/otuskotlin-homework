@@ -9,3 +9,15 @@ ktor:
     modules:
       - "org.akira.otuskotlin.ads.app.ktor.ApplicationJvmKt.moduleJvm"
   logger: logback
+
+app:
+  repository:
+    test: "inmemory"
+    prod: "$DB_TYPE_PROD:inmemory"
+    psql:
+      schema: public
+      database: "$ADS_DB:ads_db"
+      host: "$ADS_HOST:localhost"
+      port: "$ADS_PORT:5432"
+      user: "$ADS_USER:postgres"
+      password: "$ADS_PASS:postgres"
