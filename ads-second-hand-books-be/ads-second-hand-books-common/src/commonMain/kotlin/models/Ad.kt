@@ -14,6 +14,10 @@ data class Ad(
     var lock: AdLock = AdLock.NONE,
     val permissionClient: MutableSet<AdPermissionClient> = mutableSetOf()
 ) {
+    fun deepCopy(): Ad = copy(
+        permissionClient = permissionClient.toMutableSet()
+    )
+
     fun isEmpty() = this == NONE
 
     companion object {
