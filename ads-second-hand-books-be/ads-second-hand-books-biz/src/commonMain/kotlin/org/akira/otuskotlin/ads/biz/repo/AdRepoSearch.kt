@@ -20,7 +20,7 @@ fun ICorChainDsl<AdContext>.repoSearch(title: String) = worker {
             adType = adFilterValidated.adType
         )
         when(val result = adRepo.searchAd(request)) {
-            is DbAdsResponseOk -> result.data.toMutableList()
+            is DbAdsResponseOk -> adsRepoDone = result.data.toMutableList()
             is DbAdsResponseErr -> fail(result.errors)
         }
     }

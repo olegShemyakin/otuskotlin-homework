@@ -19,6 +19,19 @@ services:
       timeout: 5s
       retries: 5
 
+  liquibase:
+    image: "ads-second-hand-books-pg:0.1.0"
+    environment:
+      LIQUIBASE_URL:
+      LIQUIBASE_COMMAND_URL: jdbc:postgresql://psql:5432/ads_db
+      LIQUIBASE_COMMAND_USERNAME: postgres
+      LIQUIBASE_COMMAND_PASSWORD: "postgres"
+      LIQUIBASE_LIQUIBASE_SCHEMA_NAME: public
+
+    depends_on:
+      psql:
+        condition: service_healthy
+
 volumes:
   postgres_data:
 

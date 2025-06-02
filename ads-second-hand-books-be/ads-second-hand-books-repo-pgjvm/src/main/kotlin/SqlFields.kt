@@ -15,7 +15,7 @@ object SqlFields {
 
     const val AD_TYPE_TYPE = "ad_types_type"
     const val AD_TYPE_DEMAND = "demand"
-    const val AD_TYPE_PROPOSAL = "PROPOSAL"
+    const val AD_TYPE_PROPOSAL = "proposal"
 
     const val FILTER_TITLE = TITLE
     const val FILTER_OWNER_ID = OWNER_ID

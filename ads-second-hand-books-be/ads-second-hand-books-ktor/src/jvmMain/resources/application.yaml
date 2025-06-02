@@ -13,7 +13,7 @@ ktor:
 app:
   repository:
     test: "inmemory"
-    prod: "$DB_TYPE_PROD:inmemory"
+    prod: "$DB_TYPE_PROD:pg"
     psql:
       schema: public
       database: "$ADS_DB:ads_db"

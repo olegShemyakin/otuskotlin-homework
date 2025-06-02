@@ -15,7 +15,7 @@ import org.akira.otuskotlin.ads.app.ktor.plugins.initAppSettings
 import org.slf4j.event.Level
 import v1.v1Ad
 
-//необходим файл конфигурации application.conf
+//необходим файл конфигурации application.conf_
 //fun main(args: Array<String>): Unit = io.ktor.server.cio.EngineMain.main(args)
 
 fun Application.moduleJvm(
