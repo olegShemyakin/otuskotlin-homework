@@ -2,6 +2,7 @@ package org.akira.otuskotlin.ads.biz
 
 import org.akira.otuskotlin.ads.biz.general.*
 import org.akira.otuskotlin.ads.biz.general.stubs
+import org.akira.otuskotlin.ads.biz.repo.*
 import org.akira.otuskotlin.ads.biz.stubs.*
 import org.akira.otuskotlin.ads.biz.validation.*
 import org.akira.otuskotlin.ads.common.AdContext
@@ -9,7 +10,9 @@ import org.akira.otuskotlin.ads.common.AdCorSettings
 import org.akira.otuskotlin.ads.common.models.AdCommand
 import org.akira.otuskotlin.ads.common.models.AdId
 import org.akira.otuskotlin.ads.common.models.AdLock
+import org.akira.otuskotlin.ads.common.models.AdState
 import org.akira.otuskotlin.ads.cor.ICorExec
+import org.akira.otuskotlin.ads.cor.chain
 import org.akira.otuskotlin.ads.cor.rootChain
 import org.akira.otuskotlin.ads.cor.worker
 
@@ -21,6 +24,7 @@ class AdProcessor(
 
     private val businessChain: ICorExec<AdContext> = rootChain {
         initStatus("Инициализация статуса")
+        initRepo("Инициализация репозитория")
 
         operation("Создание объявления", AdCommand.CREATE) {
             stubs("Обработка стабов") {
@@ -48,6 +52,12 @@ class AdProcessor(
 
                 finishAdValidation("Завершена проверка")
             }
+            chain {
+                title = "Логика сохранения"
+                repoPrepareCreate("Подготовка объекта для сохранения")
+                repoCreate("Создание объявления в БД")
+            }
+            prepareResult("Подготовка ответа")
         }
         operation("Получить объявление", AdCommand.READ) {
             stubs("Обработка стабов") {
@@ -65,6 +75,16 @@ class AdProcessor(
 
                 finishAdValidation("Успешное завершение процедуры валидации")
             }
+            chain {
+                title = "Логика чтения"
+                repoRead("Чтение объявления из БД")
+                worker {
+                    title = "Подготовка ответа для Read"
+                    on { state == AdState.RUNNING }
+                    handle { adRepoDone = adRepoRead }
+                }
+            }
+            prepareResult("Подготовка ответа")
         }
         operation("Изменить объявление", AdCommand.UPDATE) {
             stubs("Обработка стабов") {
@@ -98,6 +118,14 @@ class AdProcessor(
 
                 finishAdValidation("Завершена проверка")
             }
+            chain {
+                title = "Логика обновления"
+                repoRead("Чтение объявления из БД")
+                checkLock("Проверяем консистентность по оптимистичной блокировке")
+                repoPrepareUpdate("Подготовка объекта для обновления")
+                repoUpdate("Обновление объявления в БД")
+            }
+            prepareResult("Подготовка ответа")
         }
         operation("Удалить объявление", AdCommand.DELETE) {
             stubs("Обработка стабов") {
@@ -118,6 +146,14 @@ class AdProcessor(
 
                 finishAdValidation("Завершена проверка")
             }
+            chain {
+                title = "Логика удаления объекта"
+                repoRead("Чтение объявления из БД")
+                checkLock("Проверяем констистентность по оптимистичной блокировке")
+                repoPrepareDelete("Подготовка объекта для удаления")
+                repoDelete("Удаление объявления из БД")
+            }
+            prepareResult("Подготовка ответа")
         }
         operation("Поиск объявлений", AdCommand.SEARCH) {
             stubs("Обработка стабов") {
@@ -132,6 +168,8 @@ class AdProcessor(
 
                 finishAdFilterValidation("Успешное завершение процедуры валидации")
             }
+            repoSearch("Поиск объвления в БД по фильтру")
+            prepareResult("Подготовка ответа")
         }
     }.build()
 }

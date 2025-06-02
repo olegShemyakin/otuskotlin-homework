@@ -2,6 +2,7 @@ package org.akira.otuskotlin.ads.common
 
 import kotlinx.datetime.Instant
 import org.akira.otuskotlin.ads.common.models.*
+import org.akira.otuskotlin.ads.common.repo.IRepoAd
 import org.akira.otuskotlin.ads.common.stubs.AdsStubs
 
 data class AdContext(
@@ -24,7 +25,13 @@ data class AdContext(
     var adValidated: Ad = Ad(),
     var adFilterValidated: AdFilter = AdFilter(),
 
+    var adRepo: IRepoAd = IRepoAd.NONE,
+    var adRepoRead: Ad = Ad(),
+    var adRepoPrepare: Ad = Ad(),
+    var adRepoDone: Ad = Ad(),
+    var adsRepoDone: MutableList<Ad> = mutableListOf(),
+
     var adResponse: Ad = Ad(),
-    val adsResponse: MutableList<Ad> = mutableListOf()
+    var adsResponse: MutableList<Ad> = mutableListOf()
 
     )

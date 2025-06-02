@@ -13,3 +13,4 @@ rootProject.name = "otuskotlin-homework"
 includeBuild("lessons")
 includeBuild("ads-second-hand-books-be")
 includeBuild("ads-second-hand-books-libs")
+includeBuild("ads-second-hand-books-other")

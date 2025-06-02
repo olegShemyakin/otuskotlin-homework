@@ -98,7 +98,9 @@ private fun AdCreateObject?.toInternal(): Ad = Ad(
 )
 
 private fun AdSearchFilter?.toInternal(): AdFilter = AdFilter(
-    searchString = this?.searchString ?: ""
+    searchString = this?.searchString ?: "",
+    ownerId = this?.ownerId?.let { AdUserId(it) } ?: AdUserId.NONE,
+    adType = this?.typeAd.toAdType()
 )
 
 private fun AdUpdateObject?.toInternal(): Ad = Ad(
